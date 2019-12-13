@@ -240,7 +240,7 @@ export function functionName() {
                 let tl2 = new TimelineMax();
                 let newColor = new THREE.Color(gallery[current][index].color);
 
-                tl2.to(color, Math.random() * 2, {
+                tl2.to(color, Math.random() * 1, {
                     r: newColor.r,
                     g: newColor.g,
                     b: newColor.b
@@ -258,7 +258,7 @@ export function functionName() {
 
                     });
                 });
-            }, 1500);
+            }, 100);
         });
     });
 
