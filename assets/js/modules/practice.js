@@ -245,7 +245,7 @@ export function functionName() {
             render();
         }
 
-        function render () {
+        function render() {
             renderer.render(scene, camera);
         }
 
@@ -253,20 +253,20 @@ export function functionName() {
         animate();
 
         let interval;
+        let timeout;
         let current = 0;
-        
-        setInterval(() => {
+    
+        interval = setInterval(() => {
             changePicture();
         }, 3000);
 
-        $(document).on("click", function () {
+        $("body").on("click", function () {
+            clearInterval(interval);
             changePicture();
         });
         
-        function changePicture () {
-            clearInterval(interval);
+        function changePicture() {
             clearTimeout(timeout);
-            let timeout;
             current++;
             current = current % gallery.length;
     
@@ -283,19 +283,13 @@ export function functionName() {
                     let tl2 = new TimelineMax();
                     let newColor = new THREE.Color(gallery[current][index].color);
             
-                    // color = newColor ;
-            
-                    // color.r = newColor.r;
-                    // color.g = newColor.g;
-                    // color.b = newColor.b;
-            
                     tl2.to(color, Math.random(), {
                         r: newColor.r,
                         g: newColor.g,
                         b: newColor.b
                     });
                 });
-            }, 500);
+            }, 1000);
         }
     });
 

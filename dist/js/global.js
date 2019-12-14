@@ -64965,20 +64965,20 @@ function functionName() {
         animate();
 
         var interval = void 0;
+        var timeout = void 0;
         var current = 0;
 
-        setInterval(function () {
+        interval = setInterval(function () {
             changePicture();
         }, 3000);
 
-        $(document).on("click", function () {
+        $("body").on("click", function () {
+            clearInterval(interval);
             changePicture();
         });
 
         function changePicture() {
-            clearInterval(interval);
             clearTimeout(timeout);
-            var timeout = void 0;
             current++;
             current = current % gallery.length;
 
@@ -64995,19 +64995,13 @@ function functionName() {
                     var tl2 = new __WEBPACK_IMPORTED_MODULE_2_gsap_gsap_core__["a" /* TimelineMax */]();
                     var newColor = new __WEBPACK_IMPORTED_MODULE_0_three__["a" /* Color */](gallery[current][index].color);
 
-                    // color = newColor ;
-
-                    // color.r = newColor.r;
-                    // color.g = newColor.g;
-                    // color.b = newColor.b;
-
                     tl2.to(color, Math.random(), {
                         r: newColor.r,
                         g: newColor.g,
                         b: newColor.b
                     });
                 });
-            }, 500);
+            }, 1000);
         }
     });
 
