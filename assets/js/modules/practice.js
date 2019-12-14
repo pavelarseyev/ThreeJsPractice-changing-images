@@ -250,7 +250,7 @@ export function functionName() {
 
         let current = 0;
 
-        $("body").on("click", function() {
+        $("body").on("click touchstart", function() {
 
             current++;
             current = current % gallery.length;
