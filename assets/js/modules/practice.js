@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import { TimelineMax } from "gsap/gsap-core";
-import * as dat from 'dat.gui';
+import * as dat from "dat.gui";
 
 THREE.OrbitControls = OrbitControls;
 
@@ -37,7 +37,7 @@ export function functionName() {
             img.onload = function () {
                 images.push(img);
                 if (images.length === paths.length) {
-                    whenLoaded(images)
+                    whenLoaded(images);
                 }
             };
 
@@ -104,11 +104,13 @@ export function functionName() {
 
         let gallery = [];
 
-        loadedImages.forEach(function(el) {
+        loadedImages.forEach(function (el) {
             gallery.push(getArrayFromImage(el));
         });
 
-        let maxLength = Math.max(...gallery.map(el => {return el.length}));
+        let maxLength = Math.max(...gallery.map(el => {
+            return el.length;
+        }));
 
         gallery.forEach(el => shuffle(fillUp(el, maxLength)));
         
@@ -223,7 +225,9 @@ export function functionName() {
             requestAnimationFrame(animate);
 
             geometry.vertices.forEach(function (particle, index) {
-                let dX, dY, dZ;
+                let dX;
+                let dY;
+                let dZ;
 
                 dX = Math.sin(i/10 + (index/2)) / (Math.random() * 2 + 3);
                 // dX = 0;
@@ -241,17 +245,28 @@ export function functionName() {
             render();
         }
 
-        function render() {
+        function render () {
             renderer.render(scene, camera);
         }
 
         init();
         animate();
 
+        let interval;
         let current = 0;
+        
+        setInterval(() => {
+            changePicture();
+        }, 3000);
 
-        $("body").on("click touchstart", function() {
-
+        $(document).on("click", function () {
+            changePicture();
+        });
+        
+        function changePicture () {
+            clearInterval(interval);
+            clearTimeout(timeout);
+            let timeout;
             current++;
             current = current % gallery.length;
     
@@ -263,20 +278,17 @@ export function functionName() {
                     y: gallery[current][index].y
                 });
             });
-
-            
-
-            setTimeout(function () {
+            timeout = setTimeout(function () {
                 geometry.colors.forEach(function (color, index) {
                     let tl2 = new TimelineMax();
                     let newColor = new THREE.Color(gallery[current][index].color);
-    
+            
                     // color = newColor ;
-                    
+            
                     // color.r = newColor.r;
                     // color.g = newColor.g;
                     // color.b = newColor.b;
-        
+            
                     tl2.to(color, Math.random(), {
                         r: newColor.r,
                         g: newColor.g,
@@ -284,7 +296,7 @@ export function functionName() {
                     });
                 });
             }, 500);
-        });
+        }
     });
 
     // document.querySelector(".main").appendChild(canvas);

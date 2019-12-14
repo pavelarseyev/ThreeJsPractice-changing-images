@@ -64937,9 +64937,9 @@ function functionName() {
             requestAnimationFrame(animate);
 
             geometry.vertices.forEach(function (particle, index) {
-                var dX = void 0,
-                    dY = void 0,
-                    dZ = void 0;
+                var dX = void 0;
+                var dY = void 0;
+                var dZ = void 0;
 
                 dX = Math.sin(i / 10 + index / 2) / (Math.random() * 2 + 3);
                 // dX = 0;
@@ -64964,10 +64964,21 @@ function functionName() {
         init();
         animate();
 
+        var interval = void 0;
         var current = 0;
 
-        $("body").on("click", function () {
+        setInterval(function () {
+            changePicture();
+        }, 3000);
 
+        $(document).on("click", function () {
+            changePicture();
+        });
+
+        function changePicture() {
+            clearInterval(interval);
+            clearTimeout(timeout);
+            var timeout = void 0;
             current++;
             current = current % gallery.length;
 
@@ -64979,8 +64990,7 @@ function functionName() {
                     y: gallery[current][index].y
                 });
             });
-
-            setTimeout(function () {
+            timeout = setTimeout(function () {
                 geometry.colors.forEach(function (color, index) {
                     var tl2 = new __WEBPACK_IMPORTED_MODULE_2_gsap_gsap_core__["a" /* TimelineMax */]();
                     var newColor = new __WEBPACK_IMPORTED_MODULE_0_three__["a" /* Color */](gallery[current][index].color);
@@ -64998,7 +65008,7 @@ function functionName() {
                     });
                 });
             }, 500);
-        });
+        }
     });
 
     // document.querySelector(".main").appendChild(canvas);
