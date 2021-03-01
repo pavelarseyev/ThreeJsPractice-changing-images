@@ -39,7 +39,7 @@
     "gulp-util": "^3.0.8",
     "imagemin-mozjpeg": "^6.0.0",
     "plugin-error": "^1.0.1",
-    "three": "^0.111.0",
+    "three": "^0.125.0",
     "uglifyjs-webpack-plugin": "^1.2.0",
     "webpack": "^3.11.0",
     "webpack-stream": "^4.0.1"
